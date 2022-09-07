@@ -34,17 +34,25 @@ def check_names(list_of_names):
 print(check_names(list_of_names))
 
 #Task 4
-#
+# Quadratic Time: O(n^2)
 def sort_list(unsorted_numbers):
-    while (unsorted_numbers[0] != min(unsorted_numbers)) or (unsorted_numbers[-1] != max(unsorted_numbers)):
+    sorted = False
+    no_change = 0
+    while sorted == False:
         for number in range(len(unsorted_numbers)):
-            first_value = unsorted_numbers.pop(number)
-            if number < len(unsorted_numbers):
-                if first_value > unsorted_numbers[number]:
-                    unsorted_numbers.insert(number+1, first_value)
+            if number < len(unsorted_numbers)-1:
+                first_value = unsorted_numbers[number]
+                second_value = unsorted_numbers[number+1]
+                if first_value > second_value:
+                    unsorted_numbers[number] = second_value
+                    unsorted_numbers[number+1] = first_value
                 else:
-                    unsorted_numbers.insert(number, first_value)
-        unsorted_numbers.insert(number, first_value)
+                    no_change += 1
+        if no_change == len(unsorted_numbers)-1:
+            sorted = True
+        else:
+            no_change = 0
     return unsorted_numbers
-sorted_list = sort_list([3,5,2,78,6,9])
+
+sorted_list = sort_list([20001283, 374, 3587, 2384, 239, 5, 403, 48752438975239084, 29, 1, 9834])
 print(sorted_list)
